@@ -6,17 +6,50 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable } from "react-native";
 import { useRouter } from "expo-router";
+import axios from "axios";
+import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+        if (token) {
+          router.replace("/(tabs)/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }, []);
+
+  const handleLogin = () => {
+    const user = { email: email, password: password };
+    axios
+      .post("http://10.0.2.2:3000/login", user)
+      .then((res) => {
+        // console.log(res);
+        const token = res.data.token;
+        AsyncStorage.setItem("authToken", token);
+        router.replace("/(tabs)/home");
+        // Alert.alert("User logged in successfully", "You can now use the app.")
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert("Login failed", "Please try again.");
+      });
+  };
 
   return (
     <SafeAreaView
@@ -110,6 +143,7 @@ const login = () => {
           </View>
           <View style={{ marginTop: 60 }} />
           <Pressable
+            onPress={handleLogin}
             style={{
               width: 200,
               backgroundColor: "#6699CC",
@@ -130,7 +164,10 @@ const login = () => {
               Login
             </Text>
           </Pressable>
-          <Pressable onPress={() => router.replace("/register")} style={{ marginTop: 15 }}>
+          <Pressable
+            onPress={() => router.replace("/register")}
+            style={{ marginTop: 15 }}
+          >
             <Text style={{ textAlign: "center", fontSize: 15, color: "gray" }}>
               Don't Have an account? Sign up
             </Text>

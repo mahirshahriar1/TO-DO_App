@@ -9,14 +9,36 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable } from "react-native";
 import { useRouter } from "expo-router";
+import axios from "axios";
+import { Alert } from "react-native";
 
 const register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const router = useRouter();
+
+  const handleRegister = () => {
+    const user = { name: name, email: email, password: password };
+
+    axios.post("http://10.0.2.2:3000/register", user).then((res) => {
+      // console.log(res);
+      Alert.alert("User registered successfully", "You can now login.")
+      setEmail("");
+      setPassword("");
+      setName("");
+
+    }).catch((err) => {
+      console.log(err);
+      Alert.alert("Registration failed", "Please try again.")
+    })
+  }
+
+
 
   return (
     <SafeAreaView
@@ -35,6 +57,36 @@ const register = () => {
         </View>
 
         <View style={{ marginTop: 70 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              backgroundColor: "#E0E0E0",
+              paddingVertical: 5,
+              borderRadius: 5,
+              marginTop: 30,
+            }}
+          >
+            <Ionicons
+              style={{ marginLeft: 8 }}
+              name="person"
+              size={24}
+              color="gray"
+            />
+
+            <TextInput
+              value={name}             
+              onChangeText={(text) => setName(text)}
+              style={{
+                color: "gray",
+                marginVertical: 10,
+                width: 300,
+                fontSize: name ? 17 : 17,
+              }}
+              placeholder="Enter your Name"
+            />
+          </View>
           <View
             style={{
               flexDirection: "row",
@@ -98,6 +150,7 @@ const register = () => {
 
           <View style={{ marginTop: 60 }} />
           <Pressable
+            onPress={handleRegister}
             style={{
               width: 200,
               backgroundColor: "#6699CC",
