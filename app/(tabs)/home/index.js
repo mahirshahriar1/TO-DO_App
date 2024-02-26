@@ -28,6 +28,7 @@ import {
   FontAwesome,
 } from "@expo/vector-icons";
 
+
 const index = () => {
   const [todos, setTodos] = useState([]);
   const [pendingTodos, setPendingTodos] = useState([]);
@@ -37,7 +38,7 @@ const index = () => {
   const [category, setCategory] = useState("All");
   const [marked, setMarked] = useState("false");
   const today = moment().format("MMM Do");
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState(true);
 
   const suggestions = [
     {
@@ -287,7 +288,7 @@ const index = () => {
                     <MaterialIcons
                       onPress={() => setDropdown((dropdown) => !dropdown)}
                       name="arrow-drop-down"
-                      size={24}
+                      size={30}
                       color="black"
                     />
                   </View>
