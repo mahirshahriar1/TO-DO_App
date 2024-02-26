@@ -2,7 +2,7 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { LineChart } from "react-native-chart-kit";
-
+import { useFocusEffect } from "@react-navigation/native";
 
 const index = () => {
   const [completedTasks, setCompletedTasks] = useState(0);
@@ -17,9 +17,14 @@ const index = () => {
       console.log("error", error);
     }
   };
-  useEffect(() => {
-    fetchTaskData();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchTaskData();
+
+      // Replace the console.log with the code you want to execute when the tab is focused
+    }, [])
+  );
+
   // console.log("completedTasks", completedTasks);
   // console.log("pendingTasks", pendingTasks);
 

@@ -1,5 +1,6 @@
 import {
   Pressable,
+  TouchableNativeFeedback,
   ScrollView,
   StyleSheet,
   Text,
@@ -27,9 +28,11 @@ import {
   MaterialIcons,
   FontAwesome,
 } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 
 const index = () => {
+  const router = useRouter();
   const [todos, setTodos] = useState([]);
   const [pendingTodos, setPendingTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
@@ -67,6 +70,7 @@ const index = () => {
     },
   ];
 
+  // console.log("category", category); 
   const addTodo = async () => {
     try {
       const userID = await AsyncStorage.getItem("userId");
@@ -89,6 +93,7 @@ const index = () => {
       await getUserTodos();
       setModalVisible(false);
       setTodo("");
+   
     } catch (error) {
       console.log("error", error);
     }
@@ -230,6 +235,7 @@ const index = () => {
                         category: item?.category,
                         createdAt: item?.createdAt,
                         dueDate: item?.dueDate,
+                        status : 'pending'
                       },
                     });
                   }}
@@ -414,6 +420,8 @@ const index = () => {
             />
             <Ionicons onPress={addTodo} name="send" size={24} color="#007FFF" />
           </View>
+          <Text style={{fontWeight:'bold'}}>Current Category - '{category}'</Text>
+          <View style={{padding:5}}/>
           <Text>Choose Category</Text>
 
           <View
@@ -426,6 +434,7 @@ const index = () => {
           >
             <Pressable
               onPress={() => setCategory("Work")}
+              android_ripple={{ color: 'grey' }} 
               style={{
                 borderColor: "#E0E0E0",
                 paddingHorizontal: 10,
@@ -438,6 +447,7 @@ const index = () => {
             </Pressable>
             <Pressable
               onPress={() => setCategory("Personal")}
+              android_ripple={{ color: 'grey' }} 
               style={{
                 borderColor: "#E0E0E0",
                 paddingHorizontal: 10,
@@ -450,6 +460,7 @@ const index = () => {
             </Pressable>
             <Pressable
               onPress={() => setCategory("WishList")}
+              android_ripple={{ color: 'grey' }} 
               style={{
                 borderColor: "#E0E0E0",
                 paddingHorizontal: 10,

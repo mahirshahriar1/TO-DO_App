@@ -162,9 +162,10 @@ app.patch("/todos/:todoId/pending", async (req, res) => {
   }
 });
 
-app.get("/todos/completed/:date", async (req, res) => {
+app.get("/todos/completed/:date/:userId", async (req, res) => {
   try {
     const date = req.params.date;
+    const userId = req.params.userId;
     console.log("date", date);
     // date is in the format DD-MM-YYYY
     const completedTodos = await Todo.find({
@@ -175,6 +176,7 @@ app.get("/todos/completed/:date", async (req, res) => {
         $gte: moment(date, "DD-MM-YYYY").startOf("day").toDate(),
       $lt: moment(date, "DD-MM-YYYY").endOf("day").toDate(),
       },
+      userId,
     }).exec();    
 
     console.log("completedTodos", completedTodos);
