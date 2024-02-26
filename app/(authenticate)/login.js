@@ -32,6 +32,7 @@ const login = () => {
         console.log(error);
       }
     };
+    // checkLoginStatus();
   }, []);
 
   const handleLogin = () => {
@@ -42,6 +43,7 @@ const login = () => {
         // console.log(res);
         const token = res.data.token;
         AsyncStorage.setItem("authToken", token);
+        AsyncStorage.setItem("userId", res.data.userId);
         router.replace("/(tabs)/home");
         // Alert.alert("User logged in successfully", "You can now use the app.")
       })

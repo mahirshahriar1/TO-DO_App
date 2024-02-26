@@ -11,11 +11,11 @@ export default function Layout() {
         name="home"
         options={{
           tabBarLabel: "Home",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "#007FFF" },
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <FontAwesome name="tasks" size={24} color="#7CB9E8" />
+              <FontAwesome name="tasks" size={24} color="#007FFF" />
             ) : (
               <FontAwesome name="tasks" size={24} color="black" />
             ),
@@ -25,11 +25,11 @@ export default function Layout() {
         name="calendar"
         options={{
           tabBarLabel: "Calendar",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "#007FFF" },
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <AntDesign name="calendar" size={24} color="#7CB9E8" />
+              <AntDesign name="calendar" size={24} color="#007FFF" />
             ) : (
              <AntDesign name="calendar" size={24} color="black" />
             ),
@@ -39,14 +39,14 @@ export default function Layout() {
         name="profile"
         options={{
           tabBarLabel: "Profile",
-          tabBarLabelStyle: { color: "#7CB9E8" },
+          tabBarLabelStyle: { color: "#007FFF" },
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <MaterialCommunityIcons
                 name="account-details"
                 size={24}
-                color="#7CB9E8"
+                color="#007FFF"
               />
             ) : (
               <MaterialCommunityIcons
