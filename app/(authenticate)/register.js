@@ -25,7 +25,7 @@ const register = () => {
   const handleRegister = () => {
     const user = { name: name, email: email, password: password };
 
-    axios.post("http://10.0.2.2:3000/register", user).then((res) => {
+    axios.post("https://to-do-app-2.onrender.com/register", user).then((res) => {
       // console.log(res);
       Alert.alert("User registered successfully", "You can now login.")
       setEmail("");

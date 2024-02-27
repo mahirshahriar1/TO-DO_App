@@ -32,13 +32,13 @@ const login = () => {
         console.log(error);
       }
     };
-    // checkLoginStatus();
+    checkLoginStatus();
   }, []);
 
   const handleLogin = () => {
     const user = { email: email, password: password };
     axios
-      .post("http://10.0.2.2:3000/login", user)
+      .post("https://to-do-app-2.onrender.com/login", user)
       .then((res) => {
         // console.log(res);
         const token = res.data.token;

@@ -9,7 +9,7 @@ const index = () => {
   const [pendingTasks, setPendingTasks] = useState(0);
   const fetchTaskData = async () => {
     try {
-      const response = await axios.get("http://10.0.2.2:3000/todos/count");
+      const response = await axios.get("https://to-do-app-2.onrender.com/todos/count");
       const { totalCompletedTodos, totalPendingTodos } = response.data;
       setCompletedTasks(totalCompletedTodos);
       setPendingTasks(totalPendingTodos);

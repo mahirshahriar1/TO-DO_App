@@ -22,7 +22,7 @@ const index = () => {
       const userID = await AsyncStorage.getItem("userId");
       console.log("userID", userID);
       const response = await axios.get(
-        `http://10.0.2.2:3000/todos/completed/${selectedDate}/${userID}`
+        `https://to-do-app-2.onrender.com/todos/completed/${selectedDate}/${userID}`
       );
 
       const completedTodos = response.data.completedTodos || [];

@@ -82,7 +82,7 @@ const index = () => {
 
       // console.log("userID", userID);
       axios
-        .post(`http://10.0.2.2:3000/todos/${userID}`, todoData)
+        .post(`https://to-do-app-2.onrender.com/todos/${userID}`, todoData)
         .then((response) => {
           // console.log(response);
         })
@@ -106,7 +106,7 @@ const index = () => {
     try {
       const userID = await AsyncStorage.getItem("userId");
       const response = await axios.get(
-        `http://10.0.2.2:3000/users/${userID}/todos`
+        `https://to-do-app-2.onrender.com/users/${userID}/todos`
       );
 
       // console.log(response.data.todos);
@@ -128,7 +128,7 @@ const index = () => {
     try {
       setMarked(true);
       const response = await axios.patch(
-        `http://10.0.2.2:3000/todos/${todoId}/complete`
+        `https://to-do-app-2.onrender.com/todos/${todoId}/complete`
       );
       //make and alert
       Alert.alert("Task Completed", "Good Job! Keep it up");
@@ -141,7 +141,7 @@ const index = () => {
     try {
       setMarked(false);
       const response = await axios.patch(
-        `http://10.0.2.2:3000/todos/${todoId}/pending`
+        `https://to-do-app-2.onrender.com/todos/${todoId}/pending`
       );
       //make and alert
       Alert.alert("Task undone", "You can do it!");
